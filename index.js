@@ -30,7 +30,8 @@ fetch(`${repoUrl}/v2/users/login/`, {
 .then(({ token }) => {
   return fetch(`${repoUrl}/v2/namespaces/${namespace}/repositories/${repository}/tags?page_size=100`, {
     headers: {
-      "authorization": token
+      "Authorization": `Bearer ${token}`,
+      "Content-Type": "application/json"
     }
   })
 })
