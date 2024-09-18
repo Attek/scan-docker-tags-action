@@ -1,8 +1,11 @@
 name: Scan Docker Tags
 description: Scan a Docker repository for recently-updated tags
 inputs:
-  image:
-    description: The Docker image to scan (sans tag), e.g. "mhart/alpine-node"
+  namespace:
+    description: The Docker namespace to scan (sans tag), e.g. "mhart"
+    required: true
+  repository:
+    description: The Docker repository to scan (sans tag), e.g. "alpine-node"
     required: true
   max-age-minutes:
     description: The maximum age of tags in minutes. Older tags are discarded

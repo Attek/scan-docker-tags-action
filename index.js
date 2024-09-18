@@ -2,10 +2,11 @@ const fetch = require("node-fetch")
 const core = require('@actions/core');
 
 
-let repoUrl, image, regex, maxAgeMinutes, username, password
+let repoUrl, namespace, repository, regex, maxAgeMinutes, username, password
 try {
   repoUrl       = core.getInput("repo-url")
-  image         = core.getInput("image")
+  namespace     = core.getInput("namespace")
+  repository    = core.getInput("repository")
   regex         = new RegExp(core.getInput("tag-regex"))
   maxAgeMinutes = parseInt(core.getInput("max-age-minutes"))
   username      = core.getInput("username")
@@ -27,7 +28,7 @@ fetch(`${repoUrl}/v2/users/login/`, {
 })
 .then(processResponse)
 .then(({ token }) => {
-  return fetch(`${repoUrl}/v2/repositories/${image}/tags?page_size=100`, {
+  return fetch(`${repoUrl}/v2/namespaces/${namespace}/repositories/${repository}/tags?page_size=100`, {
     headers: {
       "authorization": token
     }
