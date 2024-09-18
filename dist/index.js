@@ -96,7 +96,7 @@ fetch(`${repoUrl}/v2/users/login/`, {
 })
 .then(processResponse)
 .then(({ token }) => {
-  return fetch(`${repoUrl}/v2/repositories/${image}/tags?page_size=100`, {
+  return fetch(`${repoUrl}/repository/docker/${image}/tags?page_size=100`, {
     headers: {
       "authorization": token
     }
