@@ -71,10 +71,11 @@ const fetch = __webpack_require__(454)
 const core = __webpack_require__(470);
 
 
-let repoUrl, image, regex, maxAgeMinutes, username, password
+let repoUrl, namespace, repository, regex, maxAgeMinutes, username, password
 try {
   repoUrl       = core.getInput("repo-url")
-  image         = core.getInput("image")
+  namespace     = core.getInput("namespace")
+  repository    = core.getInput("repository")
   regex         = new RegExp(core.getInput("tag-regex"))
   maxAgeMinutes = parseInt(core.getInput("max-age-minutes"))
   username      = core.getInput("username")
@@ -96,7 +97,7 @@ fetch(`${repoUrl}/v2/users/login/`, {
 })
 .then(processResponse)
 .then(({ token }) => {
-  return fetch(`${repoUrl}/repository/docker/${image}/tags?page_size=100`, {
+  return fetch(`${repoUrl}/v2/namespaces/${namespace}/repositories/${repository}/tags`, {
     headers: {
       "authorization": token
     }

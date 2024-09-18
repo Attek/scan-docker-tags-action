@@ -23,7 +23,8 @@ jobs:
       - name: Scan Docker Repository
         uses: dhet/scan-docker-tags-action@v1.0.1
         with:
-          image: mhart/alpine-node
+          namespace: lsybc
+          repository: ifc-portal-cms
           max-age-minutes: 15
           username: ${{ secrets.DOCKER_HUB_USER }}
           password: ${{ secrets.DOCKER_HUB_PASSWORD }}
